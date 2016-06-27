@@ -1,0 +1,38 @@
+{
+  "name": "request-state",
+  "version": "1.0.0",
+  "description": "Helps maintaining request-state when using react-redux",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "compile": "babel src -d dist",
+    "prepublish": "npm run compile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emilmork/request-state.git"
+  },
+  "keywords": [
+    "request",
+    "state",
+    "react-redux",
+    "redux",
+    "reducer"
+  ],
+  "author": "Emil Mork <emil.a.mork@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emilmork/request-state/issues"
+  },
+  "homepage": "https://github.com/emilmork/request-state#readme",
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-jest": "^13.0.0",
+    "babel-plugin-transform-object-assign": "^6.8.0",
+    "babel-polyfill": "^6.9.1",
+    "babel-preset-es2015": "^6.9.0"
+  },
+  "dependencies": {
+    "immutable": "^3.8.1"
+  }
+}
