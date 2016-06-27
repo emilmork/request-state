@@ -16,7 +16,13 @@ const state = { loading: true, data: undefined }
 or:
 const state = { loading: false, data: undefined, error: undefined }
 or even:
-const state = { loading: false, data: undefined, error: undefined, isSuccess: false, isError: false }
+const state = { 
+    loading: false, 
+    data: undefined, 
+    error: undefined, 
+    isSuccess: false, 
+    isError: false 
+}
 
 ```
 
@@ -24,12 +30,12 @@ This state does not cover all scenarios possible and is also difficult to mainta
 
 **Solution**
 
-The request-state creates a thin wrapper around all possible states your request will have, covering these foure scenarios:
+The request-state creates a thin wrapper around all possible states your request will have.
 
-IS_NOT_ASKED - request not started
-IS_FETCHING - request started
-SUCCESS - request success. We got some data
-ERROR - the request went wrong
+- IS_NOT_ASKED - request not started
+- IS_FETCHING - request started
+- SUCCESS - request success. We got some data
+- ERROR - the request went wrong
 
 
 ### Example Usage with a redux reducer
@@ -66,6 +72,10 @@ module.exports = (state = defaultState, action) => {
 
 ```javascript
 const App = React.createClass({
+    componentDidMount: function() {
+        dispatch(fetchUser('Billy'))
+    },
+
     render: function() {
         const request = this.props;
 
@@ -93,3 +103,65 @@ module.exports = connect((state) => {
 })(App)
 
 ```
+
+
+## API
+
+### Creating a `request-state` instances
+
+
+```js
+const RequestState = request('request-state');
+
+const requestState = new RequestState(); //with default state
+
+// with inital data. Will be merged with default state
+const requestStateSuccess = new RequestState({ isSuccess: true, data: [1,2] })
+
+console.log(requestStateSuccess.getData()) // [1,2]
+```
+
+### update state
+
+Call one of these methods to update state and receive a new instance of requestState.
+
+```js
+
+- `succes(dataObj)` : will return a new instance with success status and set the data (if any)
+- `fetching()` : will return a new instance with fetching state.
+- `error(errorObj)` : will return a new instance with error state and set the error object (if any)
+
+```
+
+### Checking the status of a request
+
+```js
+- `.isNotAsked()` : true if a request has succeeded or failed.
+- `.isSuccess()` : true if the request hasn't been asked for (this is the default state).
+- `.isFetching()`
+- `.isSuccess()`
+- `.isError()`
+
+```
+
+
+### Get data and error
+
+```js
+
+- `.getData()` : returns the data if any (should call `.isSuccess()` first)
+- `.getError()` : returns the error if any (should call `.isError()` first)
+
+```
+
+### Combine with other state
+There is no problem combining the requestState instance with other state
+
+```js
+const defaultState = {
+    isToggled: false,
+    requestState: new RequestState()
+}
+
+```
+
