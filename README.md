@@ -7,23 +7,22 @@ A module for simple state maintence when using redux. Inpired of the Elm request
 npm install request-state
 ```
 
+**Motivation/Problem**
 
 A normal way of representing a request state in your app might look like this:
 
 ```javascript
 const state = { loading: true, data: undefined }
-
-or
-
+or:
 const state = { loading: false, data: undefined, error: undefined }
-
-or
-
+or even:
 const state = { loading: false, data: undefined, error: undefined, isSuccess: false, isError: false }
 
 ```
 
 This state does not cover all scenarios possible and is also difficult to maintain.
+
+**Solution**
 
 The request-state creates a thin wrapper around all possible states your request will have, covering these foure scenarios:
 
