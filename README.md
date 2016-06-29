@@ -1,6 +1,6 @@
 request-state
 ===
-A module for simple state maintence when using redux. Inpired of the Elm request architecture and [RemoteDatajs](https://github.com/jackfranklin/remote-data-js)
+A simple immutable request-state container. Inpired by [RemoteDatajs](https://github.com/jackfranklin/remote-data-js).
 
 ### Install
 ```bash
@@ -9,13 +9,14 @@ npm install request-state
 
 **Motivation/Problem**
 
-A normal way of representing a request state in your app might look like this:
+Defining and displaying the state of a request is not that hard, but can be unnecessarily complicated.
 
 ```javascript
 const state = { loading: true, data: undefined }
-or:
+
 const state = { loading: false, data: undefined, error: undefined }
-or even:
+
+// Updating this state is boring and might be repeted several places in our application
 const state = { 
     loading: false, 
     data: undefined, 
@@ -26,11 +27,10 @@ const state = {
 
 ```
 
-This state does not cover all scenarios possible and is also difficult to maintain.
 
 **Solution**
 
-The request-state creates a thin wrapper around all possible states your request will have.
+The solution is to have a state for all request-state scenarios. `request-state` have four different states that can easily be updated and passed to your react-components:
 
 - IS_NOT_ASKED - request not started
 - IS_FETCHING - request started
@@ -41,7 +41,7 @@ The request-state creates a thin wrapper around all possible states your request
 ### Example Usage with a redux reducer
 
 
-`reducer.js`
+`someReducer.js`
 
 
 ```javascript
@@ -98,7 +98,7 @@ const App = React.createClass({
 
 module.exports = connect((state) => {
     return {
-        request: state.requestReducer
+        request: state.someReducer
     }
 })(App)
 
@@ -133,7 +133,7 @@ Call one of these methods to update state and receive a new instance of requestS
 
 ```
 
-### Checking the status of a request
+### checking the state
 
 ```js
 - `.isNotAsked()` : true if a request has succeeded or failed.
@@ -149,8 +149,8 @@ Call one of these methods to update state and receive a new instance of requestS
 
 ```js
 
-- `.getData()` : returns the data if any (should call `.isSuccess()` first)
-- `.getError()` : returns the error if any (should call `.isError()` first)
+- `.getData()` : returns the data set with `.success(data)`.
+- `.getError()` : returns the error set with `.error(err)`.
 
 ```
 
