@@ -136,11 +136,10 @@ Call one of these methods to update state and receive a new instance of requestS
 ### checking the state
 
 ```js
-- `.isNotAsked()` : true if a request has succeeded or failed.
-- `.isSuccess()` : true if the request hasn't been asked for (this is the default state).
-- `.isFetching()`
-- `.isSuccess()`
-- `.isError()`
+- `.isNotAsked()` // Request not started
+- `.isFetching()` // Fetching
+- `.isSuccess()` // Success. We got some data
+- `.isError()` // Error. We got an error
 
 ```
 
