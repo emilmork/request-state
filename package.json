@@ -1,7 +1,7 @@
 {
   "name": "request-state",
   "version": "1.0.0",
-  "description": "Helps maintaining request-state when using react-redux",
+  "description": "A request-state container for use with redux",
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
