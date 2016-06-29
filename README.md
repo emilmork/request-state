@@ -118,7 +118,7 @@ const requestState = new RequestState(); //with default state
 // with inital data. Will be merged with default state
 const requestStateSuccess = new RequestState({ isSuccess: true, data: [1,2] })
 
-console.log(requestStateSuccess.getData()) // [1,2]
+console.log(requestState.getData()) // [1,2]
 ```
 
 ### update state
@@ -127,9 +127,9 @@ Call one of these methods to update state and receive a new instance of requestS
 
 ```js
 
-- `succes(dataObj)` : will return a new instance with success status and set the data (if any)
-- `fetching()` : will return a new instance with fetching state.
-- `error(errorObj)` : will return a new instance with error state and set the error object (if any)
+- `.success(dataObj)` : will return a new instance with success status and set the data (if any)
+- `.fetching()` : will return a new instance with fetching state.
+- `.error(errorObj)` : will return a new instance with error state and set the error object (if any)
 
 ```
 
