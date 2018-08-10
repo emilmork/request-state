@@ -18,29 +18,20 @@ var RequestState = function (existingState) {
         };
 
     this.state = (existingState != null) ?
-        Immutable.Map(Object.assign(defaultState, existingState)) :
+        Immutable.Map(Object.assign({}, defaultState, existingState)) :
         Immutable.Map(defaultState);
 }
 RequestState.prototype.get = function() {
     return new RequestState(this.state.toJS());
 }
 RequestState.prototype.fetching = function() {
-    this.state = this.state.update(s => {
-            return s.set(DATA, null).set(IS_NOT_ASKED, false).set(IS_FETCHING, true).set(IS_ERROR, false).set(IS_SUCCESS, false);
-        });
-    return new RequestState(this.state.toJS());
+    return new RequestState(this.state.set(DATA, null).set(IS_NOT_ASKED, false).set(IS_FETCHING, true).set(IS_ERROR, false).set(IS_SUCCESS, false).toJS());
 }
 RequestState.prototype.success = function(data) {
-    this.state = this.state.update(s => {
-        return s.set(DATA, data).set(IS_NOT_ASKED, false).set(IS_FETCHING, false).set(IS_ERROR, false).set(IS_SUCCESS, true);
-    });
-    return new RequestState(this.state.toJS());
+    return new RequestState(this.state.set(DATA, data).set(IS_NOT_ASKED, false).set(IS_FETCHING, false).set(IS_ERROR, false).set(IS_SUCCESS, true).toJS());
 }
 RequestState.prototype.error = function(err) {
-    this.state = this.state.update(s => {
-        return s.set(DATA, null).set(ERROR, err).set(IS_NOT_ASKED, false).set(IS_FETCHING, false).set(IS_ERROR, true).set(IS_SUCCESS, false);
-    });
-    return new RequestState(this.state.toJS());
+    return new RequestState(this.state.set(DATA, null).set(ERROR, err).set(IS_NOT_ASKED, false).set(IS_FETCHING, false).set(IS_ERROR, true).set(IS_SUCCESS, false).toJS());
 }
 RequestState.prototype.isFetching = function() {
     return this.state.get(IS_FETCHING);

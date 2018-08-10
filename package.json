@@ -1,6 +1,6 @@
 {
   "name": "request-state",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A request-state container for use with redux",
   "main": "dist/index.js",
   "scripts": {
